@@ -1,4 +1,4 @@
-#include "helper_main.h"
+#include "kernel.h"
 void analys_arg_line(int argc, char *argv[], int *arg_value){  // definition of func func for parsing and analysing command line
     int num;  // var for individual value of command line 
     if(argc-1 != SIZE_ARG_LINE){  // must argc = 5 (without name 'proj2')
