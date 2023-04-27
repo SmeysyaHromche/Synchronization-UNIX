@@ -1,5 +1,5 @@
-#ifndef HELPER_MAIN_H
-#define HELPER_MAIN_H
+#ifndef KERNEL_H
+#define KERNEL_H
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
