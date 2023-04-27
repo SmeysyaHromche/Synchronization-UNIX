@@ -1,4 +1,4 @@
-#include "helper_main.h"
+#include "kernel.h"
 
 const char act_text[9][30] = {"started", "going home", "entering office for service", "called by office worker", "serving a service of type", "service finished", "taking break", "break finished", "closing"};
 
