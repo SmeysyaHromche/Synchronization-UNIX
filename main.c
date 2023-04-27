@@ -1,25 +1,30 @@
 #include "proj2.h"
+// author: xkukht01
 
+/* main function */
 int main(int argc, char *argv[]){
     
+    /* parsing argument from command line */
     int arg_value[SIZE_ARG_LINE];  // array with int value of arg line
     analys_arg_line(argc, argv, arg_value);  // parsing and analysing of command line
     
+    /* init shared memory */
     Shared_memory_t *post = NULL;  // abstraction "Post" (shared memory)
     post = sh_m_create();  // allocate shared memory
     sh_m_new_value(arg_value, post);  // specification shared memory
-    if(semaphors_init(post)){  // init semaphors in shared memory
-        sh_m_clean(post);
-        exit (1);
-    }
     
-    file_creating();  // create file for output
+    /* creating file for output */
+    file_creating();
     
-    pid_t id_customer[post->num_customer];  // array for identification customers process with pid
-    pid_t id_clerk[post->num_clerk];  // array for identification clerks proces with pid
+    /* creating pid_t array array for identification customers and clerks process */
+    pid_t id_customer[post->num_customer];
+    pid_t id_clerk[post->num_clerk];
 
-    for(int i = 0; i < post->num_clerk; i++){  // start customers process
+    /* starts clerks process */
+    for(int i = 0; i < post->num_clerk; i++){
+        
         id_clerk[i] = fork();  // making new process
+
         if(id_clerk[i] == 0){  // child proces
             clerk_proces(post,(i+1));
         }
@@ -31,9 +36,12 @@ int main(int argc, char *argv[]){
             exit(1);
         }
     }
-    
+
+    /* starts customers process */
     for(int i = 0; i < post->num_customer; i++){  // start clients proces
+        
         id_customer[i] = fork();  // making new process
+        
         if(id_customer[i] == 0){  // child proces
             customer_proces(post,(i+1));
         }
@@ -46,11 +54,14 @@ int main(int argc, char *argv[]){
         }
     }
     
+    /*  main proces */
     time_to_sleep(post->max_time_close_post, true);  // sleeping befor closing posts
     post->post_live = false;  // close post
     write_output(post, 0, false, false, 0, 8);
     //while(wait(NULL)>0);
     
+
+    /* ending program, cleaning resurs */
     if(semaphors_destroy(post)){  // error state if failed sem_destroy()
         fclose(file);  // closing output
         sh_m_clean(post);  // clean shared memory
