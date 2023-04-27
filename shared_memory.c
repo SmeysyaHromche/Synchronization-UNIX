@@ -1,4 +1,4 @@
-#include "shared_memory.h"
+#include "helper_main.h"
 
 void sh_m_new_value(int *arr, Shared_memory_t* post){
     
@@ -31,6 +31,7 @@ Shared_memory_t *sh_m_create(){
     Shared_memory_t *post;
     int id_shm;
     if((id_shm = shmget(IPC_PRIVATE, sizeof(Shared_memory_t), IPC_CREAT | 0666)) < 1){
+        printf("bad");
         fprintf(stderr, "Error! Failed creating shared memory shmget().\n");
         exit(1);
     }
