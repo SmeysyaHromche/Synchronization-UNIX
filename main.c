@@ -1,4 +1,4 @@
-#include "helper_main.h"
+#include "kernel.h"
 
 int main(int argc, char *argv[]){
     int arg_value[SIZE_ARG_LINE];  // array with int value of arg line
