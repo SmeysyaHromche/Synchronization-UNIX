@@ -1,19 +1,19 @@
 CC=gcc
 CFLAGS=-std=gnu99 -pthread -Wall -Werror -Wextra
 
-proj2: main.o helper_main.o shared_memory.o proces_and_sem.o
-	$(CC) $(CFLAGS) -o proj2 main.o helper_main.o shared_memory.o proces_and_sem.o
+proj2: main.o utils.o shared_memory.o proces_and_sem.o
+	$(CC) $(CFLAGS) -o proj2 main.o utils.o shared_memory.o proces_and_sem.o
 
-main.o: main.c helper_main.h
+main.o: main.c proj2.h
 	$(CC) $(CFLAGS) -c main.c
 
-helper_main.o: helper_main.c helper_main.h
-	$(CC) $(CFLAGS) -c helper_main.c
+utils.o: utils.c proj2.h
+	$(CC) $(CFLAGS) -c utils.c
 
-shared_memory.o: shared_memory.c helper_main.h
+shared_memory.o: shared_memory.c proj2.h
 	$(CC) $(CFLAGS) -c shared_memory.c
 
-proces_and_sem.o: proces_and_sem.c helper_main.h
+proces_and_sem.o: proces_and_sem.c proj2.h
 	$(CC) $(CFLAGS) -c proces_and_sem.c
 
 clean:
