@@ -1,4 +1,4 @@
-#include "kernel.h"
+#include "proj2.h"
 void analys_arg_line(int argc, char *argv[], int *arg_value){  // definition of func func for parsing and analysing command line
     int num;  // var for individual value of command line 
     if(argc-1 != SIZE_ARG_LINE){  // must argc = 5 (without name 'proj2')
@@ -45,4 +45,41 @@ void time_to_sleep(int intervale, bool main_process){
         interval_sleep = (rand()%(intervale+1))*1000;
     }
     usleep(interval_sleep);
+}
+
+const char act_text[9][30] = {"started", "going home", "entering office for service", "called by office worker", "serving a service of type", "service finished", "taking break", "break finished", "closing"};
+
+
+void file_creating(){  // definition func for open writting stream in output file
+    file = fopen("proj2.out", "w");  // open stream in file
+    if(file == NULL){
+        fprintf(stderr, "Error! Error in openning file 'proj2.out' for output.\n");
+        exit(1);
+    }
+    
+    setbuf(file, 0);  // cancel buffering for output file (writting maximum speed)
+}
+
+void write_output(Shared_memory_t *post, int service, bool customer, bool clerk, int id, int act){
+    sem_wait(&post->output_sem);
+    fprintf(file, "%d: ", post->line);
+    if(customer){
+        fprintf(file, "Z ");
+    }
+    if(clerk){
+        fprintf(file, "U ");
+    }
+    if(!customer && !clerk){
+        fprintf(file, "%s\n", act_text[act]);
+        post->line++;
+        sem_post(&post->output_sem);
+        return;
+    }
+    fprintf(file, "%d: %s  ", id, act_text[act]);
+    if(act == 2 || act == 4){
+        fprintf(file, "%d", service);
+    }
+    fprintf(file, "\n");
+    post->line++;
+    sem_post(&post->output_sem);
 }
