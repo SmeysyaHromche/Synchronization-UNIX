@@ -1,4 +1,4 @@
-#include "helper_main.h"
+#include "kernel.h"
 
 void sh_m_new_value(int *arr, Shared_memory_t* post){
     
