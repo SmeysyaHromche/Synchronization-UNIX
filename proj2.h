@@ -9,6 +9,7 @@
 #include <unistd.h>
 #include <sys/shm.h>
 #include <semaphore.h>
+#include <sys/wait.h>
 
 
 //----------------------------------------------   SHARED MEMORY   ------------------------------------------------------
@@ -72,6 +73,8 @@ Param:
 void sh_m_clean(Shared_memory_t *post);
 
 
+
+
 //---------------------------------------------   UTILS  -------------------------------------------
 
 #define SIZE_ARG_LINE 5  // const descrip count
@@ -110,6 +113,8 @@ Param:
     + int act -- index in array what save output pattern
 */
 void write_output(Shared_memory_t *post, int service, bool customer, bool clerk, int id, int act);
+
+
 
 
 //---------------------------------------------   PROCESS AND SEMAPHORS  -------------------------------------------
