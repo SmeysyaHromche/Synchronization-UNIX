@@ -1,7 +1,7 @@
 #include "proj2.h"
 
 /* const chars array with text output pattern */
-const char act_text[9][30] = {"started", "going home", "entering office for service", "called by office worker", "serving a service of type", "service finished", "taking break", "break finished", "closing"};
+const char act_text[9][30] = {"started", "going home", "entering office for a service", "called by office worker", "serving a service of type", "service finished", "taking break", "break finished", "closing"};
 
 /* parsing of command line, checking correctness of arguments and save arguments */
 void analys_arg_line(int argc, char *argv[], int *arg_value){
@@ -44,8 +44,7 @@ void analys_arg_line(int argc, char *argv[], int *arg_value){
 void time_to_sleep(int intervale, bool main_process){
     int interval_sleep;  // var for sleeping time
     if(main_process){  // if sleeping for main proces
-        double random = (double) rand() / RAND_MAX;  // random 
-        interval_sleep = (int)((intervale/2) + random*(intervale/2)*1000);
+        interval_sleep = (rand()%(intervale/2 + 1) + intervale/2)*1000;
     }
     else{
         interval_sleep = (rand()%(intervale+1))*1000;
