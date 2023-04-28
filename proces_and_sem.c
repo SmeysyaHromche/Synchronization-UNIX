@@ -2,6 +2,7 @@
 
 /* function for implement all activites in clerk proces */
 void clerk_proces(Shared_memory_t *post, int id){
+    srand(getpid()*time(NULL));  // start generic random value based on time and random pid
     int choose_service;  // var for choose service for serving
     write_output(post, 0, false, true, id, 0);  // start
     while(post->post_live || post->service_1 > 0 || post->service_2 > 0 || post->service_3 > 0){  // cycle for clearks working(work when post open and exist people in queue)
@@ -45,13 +46,13 @@ void clerk_proces(Shared_memory_t *post, int id){
 
 /* function for implement all activites in customers proces */
 void customer_proces(Shared_memory_t *post, int id){
+    srand(getpid()*time(NULL));  // start generic random value based on time and random pid
     write_output(post, 0, true, false, id, 0);  // start
     time_to_sleep(post->max_time_wait, false);  // sleep
     if(!post->post_live){  // check if post close
         write_output(post, 0, true, false, id, 1);  // go to home
         exit(0);
     }
-    srand(getpid()*time(NULL));  // start generic random value based on time and random pid
     int choose_service = rand() % 3 + 1;  // client choose servec
     switch (choose_service){
         case 1:  // if service 1
