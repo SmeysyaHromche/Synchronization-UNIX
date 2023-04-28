@@ -58,8 +58,9 @@ int main(int argc, char *argv[]){
     time_to_sleep(post->max_time_close_post, true);  // sleeping befor closing posts
     post->post_live = false;  // close post
     write_output(post, 0, false, false, 0, 8);
-    //while(wait(NULL)>0);
     
+    /* wait when all childs process will finish */
+    while(wait(NULL)>0);
 
     /* ending program, cleaning resurs */
     if(semaphors_destroy(post)){  // error state if failed sem_destroy()
