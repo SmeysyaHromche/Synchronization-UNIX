@@ -43,6 +43,8 @@ typedef struct
     sem_t service1_queue_sem;  // semaphor for serving 1 service
     sem_t service2_queue_sem;  // semaphor for serving 2 service
     sem_t service3_queue_sem;  // semaphor for serving 3 service
+    sem_t clos_sem;  // semaphor for sinchronizate with going clerk home
+    sem_t check_clos_sem;  // mutex for sinchronizate with closing post for going customers and breaaking work clerks
 }Shared_memory_t;
 
 
