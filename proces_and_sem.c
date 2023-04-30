@@ -57,23 +57,25 @@ void customer_proces(Shared_memory_t *post, int id){
     switch (choose_service){
         case 1:  // if service 1
             sem_wait(&post->service1_sem);  // wait mutex for count in queue
+            write_output(post, choose_service, true, false, id, 2);  // waiting clerk
             post->service_1++;  // inc count in queue
             sem_post(&post->service1_sem);  // post mutex for count in queue
             break;
         case 2:
             sem_wait(&post->service2_sem);  // wait mutex for count in queue
+            write_output(post, choose_service, true, false, id, 2);  // waiting clerk
             post->service_2++;  // inc count in queue
             sem_post(&post->service2_sem);  // post mutex for count in queue
             break;
         case 3:
             sem_wait(&post->service3_sem);  // wait mutex for count in queue
+            write_output(post, choose_service, true, false, id, 2);  // waiting clerk
             post->service_3++;  // inc count in queue
             sem_post(&post->service3_sem);  // post mutex for count in queue
             break;
         default:
             break;
-    }
-    write_output(post, choose_service, true, false, id, 2);  // waiting clerk 
+    } 
     switch (choose_service){
         case 1:
             sem_wait(&post->service1_queue_sem);  // invited by a clerk
