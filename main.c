@@ -56,8 +56,11 @@ int main(int argc, char *argv[]){
     
     /*  main proces */
     time_to_sleep(post->max_time_close_post, true);  // sleeping befor closing posts
+    sem_wait(&post->check_clos_sem);  // wait mutex for sinchronizate with closing post for going customers and breaaking work clerks
     post->post_live = false;  // close post
     write_output(post, 0, false, false, 0, 8);
+    sem_post(&post->check_clos_sem);  // post mutex for sinchronizate with closing post for going customers and breaaking work clerks
+    sem_post(&post->clos_sem);  // post sem for sinchronizate with going clerk home
     
     /* wait when all childs process will finish */
     while(wait(NULL)>0);
