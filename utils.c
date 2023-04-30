@@ -27,7 +27,7 @@ void analys_arg_line(int argc, char *argv[], int *arg_value){
             exit(1);
         }
 
-        if((i == 3 || i == 5) && num > 1000){  // 0 <= TZ <= 1000 and 0 <= F <= 1000
+        if((i == 3 || i == 5) && num > 10000){  // 0 <= TZ <= 1000 and 0 <= F <= 1000
             fprintf(stderr, "Error! Must be 0 <= TZ <= 1000 and 0 <= F <= 1000.\n");
             exit(1);
         }
