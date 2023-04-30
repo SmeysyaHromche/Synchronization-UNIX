@@ -28,7 +28,7 @@ int main(int argc, char *argv[]){
         if(id_clerk[i] == 0){  // child proces
             clerk_proces(post,(i+1));
         }
-        else if(id_clerk[i] == 0){  // error state after forking
+        else if(id_clerk[i] == -1){  // error state after forking
             fprintf(stderr, "Error! Fail of clerks fork.\n");
             fclose(file);  // closing output
             semaphors_destroy(post);  // clean semaphors
@@ -45,7 +45,7 @@ int main(int argc, char *argv[]){
         if(id_customer[i] == 0){  // child proces
             customer_proces(post,(i+1));
         }
-        else if(id_customer[i] == 0){  // error state after forking
+        else if(id_customer[i] == -1){  // error state after forking
             fprintf(stderr, "Error! Fail of clerks fork\n");
             fclose(file);  // closing output
             semaphors_destroy(post);  // clean semaphors
