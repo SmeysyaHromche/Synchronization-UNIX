@@ -1,6 +1,6 @@
 #include "proj2.h"
 // author: xkukht01
-
+FILE *file;  // global var for output file
 /* main function */
 int main(int argc, char *argv[]){
     
