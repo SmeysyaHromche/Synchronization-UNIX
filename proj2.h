@@ -99,8 +99,6 @@ Param:
 */
 void time_to_sleep(int intervale, bool main_process);
 
-FILE *file;  // global var for output file
-
 /* void file_creating()  -- function for opening outputs file and cancel buffering for increase the recording speed*/
 void file_creating();
 
