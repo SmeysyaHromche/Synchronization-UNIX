@@ -1,5 +1,5 @@
 #include "proj2.h"
-
+extern FILE* file;  // global var form main for output file
 /* const chars array with text output pattern */
 const char act_text[9][30] = {"started", "going home", "entering office for a service", "called by office worker", "serving a service of type", "service finished", "taking break", "break finished", "closing"};
 
@@ -27,8 +27,8 @@ void analys_arg_line(int argc, char *argv[], int *arg_value){
             exit(1);
         }
 
-        if((i == 3 || i == 5) && num > 10000){  // 0 <= TZ <= 1000 and 0 <= F <= 1000
-            fprintf(stderr, "Error! Must be 0 <= TZ <= 1000 and 0 <= F <= 1000.\n");
+        if((i == 3 || i == 5) && num > 10000){  // 0 <= TZ <= 10000 and 0 <= F <= 10000
+            fprintf(stderr, "Error! Must be 0 <= TZ <= 10000 and 0 <= F <= 10000.\n");
             exit(1);
         }
         if (i == 4 && num > 100){  // 0 <= TU <= 100
