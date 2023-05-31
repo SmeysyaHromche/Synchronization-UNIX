@@ -69,6 +69,7 @@ void sh_m_new_value(int *arr,  Shared_memory_t* post);
 
 /*
 void sh_m_clean(Shared_memory_t *post)  -- function cleaning memory of shared memory.
+
 Param:
     + Shared_memory_t* post  -- pointer on struct shared memory what will be clean
 */
@@ -84,6 +85,7 @@ void sh_m_clean(Shared_memory_t *post);
 /*
 void analys_arg_line(int argc, char *argv[], int *arg_value)  -- function for parsing of command line, checking 
 correctness of arguments and save arguments.
+
 Param:
     + int argc, char *argv[]
     + int *arg_value -- pointer on array where saved value of command lines arguments
@@ -93,6 +95,7 @@ void analys_arg_line(int argc, char *argv[], int *arg_value);
 /*
 void time_to_sleep(int intervale, bool main_process)  -- function for sleeping process on rundom time based on 
 the specified interval.
+
 Param:
     + int intervale  -- maximum value for interval
     + bool main_process  -- if True is a Main proces, else is clerks/customers process
@@ -104,6 +107,7 @@ void file_creating();
 
 /*void write_output(Shared_memory_t *post, int service, bool customer, bool clerk, int id, int act)  -- function 
 for writting output text in file.
+
 Param:
     + Shared_memory_t *post  -- shared memeory for increment count of acting in post and using semaphors
     + int service  -- number of service
@@ -122,6 +126,7 @@ void write_output(Shared_memory_t *post, int service, bool customer, bool clerk,
 /*
 void customer_proces(Shared_memory_t *post, int id) -- function implemante all activites in customer process.(start,
 sleeping, choose service and stay in services queue, wait serving from clerk, and going out from post)
+
 Param:
     + Shared_memory_t *post -- pointer on shared memory, for using data.
     + int id -- id this process
@@ -132,6 +137,7 @@ void customer_proces(Shared_memory_t *post, int id);
 void clerk_proces(Shared_memory_t *post, int id) -- function implemante all activites in clerk process.(start,
 sleeping, choose services queue for serving, customers invitation to service, serving, breaking and going
 out from post)
+
 Param:
     + Shared_memory_t *post -- pointer on shared memory, for using data.
     + int id -- id this process
@@ -141,6 +147,7 @@ void clerk_proces(Shared_memory_t *post, int id);
 /*
 int semaphors_init(Shared_memory_t *post)  - function set all semaphors from shared memory in starting state.
 If an error occurs return 1, if all ok return 0.
+
 Param:
     + Shared_memory_t *post -- pointer on shared memory whete locate semaphors
 */
@@ -149,6 +156,7 @@ int semaphors_init(Shared_memory_t *post);
 /*
 int semaphors_destroy(Shared_memory_t *post)  - function cleaning semaphors from shared memory.
 If an error occurs return 1, if all ok return 0.
+
 Param:
     + Shared_memory_t *post -- pointer on shared memory whete locate semaphors
 */
